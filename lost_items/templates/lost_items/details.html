@@ -1,0 +1,10 @@
+<h1>Lost Item Report - {{ lost_item.name }}</h1>
+<p>{{ lost_item.description }}</p>
+<p>Lost Date: {{ lost_item.lost_date }}</p>
+<img src="{{ lost_item.image.url }}" alt="{{ lost_item.name }}">
+<p>Location: {{ lost_item.location }}</p>
+<form method="post">
+    {% csrf_token %}
+    <!-- Add form fields for updating the lost item report -->
+    <button type="submit">Update</button>
+</form>

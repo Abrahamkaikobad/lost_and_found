@@ -1,0 +1,10 @@
+<h1>Search Results</h1>
+{% for lost_item in lost_items %}
+    <a href="{% url 'lost_item_detail' id=lost_item.id %}">
+        <h2>{{ lost_item.name }}</h2>
+        <img src="{{ lost_item.image.url }}" alt="{{ lost_item.name }}">
+        <p>Location: {{ lost_item.location }}</p>
+    </a>
+{% empty %}
+    <p>No search results found.</p>
+{% endfor %}

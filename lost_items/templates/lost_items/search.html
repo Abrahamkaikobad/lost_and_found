@@ -1,0 +1,17 @@
+<h1>Search for Lost Items</h1>
+<form method="Get" action="{% url 'search_results' %}">
+    {% csrf_token %}
+    <label for="q">Search</label>
+    <input type="text" name="q" id="q">
+    <!-- Add filter options for search -->
+    <button type="submit">Search</button>
+</form>
+{% for lost_item in lost_items %}
+    <a href="{% url 'lost_item_detail' id=lost_item.id %}">
+        <h2>{{ lost_item.name }}</h2>
+        <img src="{{ lost_item.image.url }}" alt="{{ lost_item.name }}">
+        <p>Location: {{ lost_item.location }}</p>
+    </a>
+{% empty %}
+    <p>No lost items found.</p>
+{% endfor %}

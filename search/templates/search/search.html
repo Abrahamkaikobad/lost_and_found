@@ -1,0 +1,28 @@
+{% extends 'search/base.html' %}
+
+{% block title %} Search {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 text-center">
+            <br>
+            <h5>Search Results For <span class="text-info">"{{request.GET.keyword}}"</span> </h5>
+        </div>
+    </div>
+</div>
+{% if results %}
+{% for result in results %}
+<div class="card" style="width: 18rem;"> 
+  
+    <img src="#" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">Name:{{result.name}}</h5>
+      <p class="card-title">Description: {{result.description}}</p>
+      <h5 class="card-title">location:{{result.location}}</h5>
+      <a href="#" class="btn btn-primary">Found Item</a>
+    </div>
+  </div>
+  {% endfor%}
+  {% endif %}
+{% endblock %}
