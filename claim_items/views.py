@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,get_object_or_404,redirect
 from search.models import LostItem
 from .forms import ContactForm
 from .models import Contact
@@ -27,3 +27,31 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'claim/claim_form.html', {'form': form})
+
+
+def show_profile(request):
+
+    profile=Contact.objects.all()
+    return render(request,'claim/show_claimers.html',{'Profile':profile})
+
+
+#Extra code --Edit later ---url comment out also ---
+def delete_item(request, item_id):
+    item = get_object_or_404(Contact, id=item_id)
+    item.delete()
+    return redirect('profile-show') 
+
+
+
+def edit_item(request, item_id):
+    item = get_object_or_404(Contact, id=item_id)
+
+    if request.method == 'POST':
+        form = Contact(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('profile-show')
+    else:
+        form = Contact(instance=item)
+
+    return render(request, 'claim/edit_item.html', {'form': form})
